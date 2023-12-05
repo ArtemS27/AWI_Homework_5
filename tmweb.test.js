@@ -11,9 +11,15 @@ afterEach(async () => {
 });
 
 describe("tmweb page test", () => {
-  test("Check title", async () => {
-    const title = await page.title();
-    expect(title).toEqual("ИдёмВКино");
+  test("Book on Today", async () => {
+    clickElement(page, 'a[data-time-stamp="1701723600"]');
+    await page.waitForTimeout(1000);
+    clickElement(page, 'a[data-seance-id="190"]');
+    await page.waitForTimeout(1000);
+    chooseSeat(page, 1, 2);
+    await page.waitForTimeout(1000);
+    bookSeats(page, '.acceptin-button');
+    await page.waitForTimeout(1000);
   });
 
   test("Book on Tomorrow", async () => {
