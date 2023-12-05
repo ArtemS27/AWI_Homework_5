@@ -1,4 +1,4 @@
-const { clickElement, chooseSeat } = require("./lib/commands.js");
+const { clickElement, chooseSeat, bookSeats } = require("./lib/commands.js");
 let page;
 
 beforeEach(async () => {
@@ -17,18 +17,22 @@ describe("tmweb page test", () => {
   });
 
   test("Book on Tomorrow", async () => {
-    clickElement(page, 'a[data-time-stamp="1701464400"]');
+    clickElement(page, 'a[data-time-stamp="1701810000"]');
     await page.waitForTimeout(1000);
     clickElement(page, 'a[data-seance-id="177"]');
     await page.waitForTimeout(1000);
-    // выбор ряда и места
-    const rows = await page.$$('.buying-scheme__row');
-    console.log(rows.length);
-    const chairs = await rows[1].$$('.buying-scheme__chair');
-    console.log(chairs.length);
-    chairs[2].click();
-    //выбор ряда и места из commands.js
-    chooseSeat(1, 2);
-    await page.waitForTimeout(3000);
+    chooseSeat(page, 1, 2);
+    await page.waitForTimeout(1000);
+    bookSeats(page, '.acceptin-button');
+    await page.waitForTimeout(1000);
+  });
+
+  test("Try book unexisted seat", async () => {
+    clickElement(page, 'a[data-time-stamp="1701810000"]');
+    await page.waitForTimeout(1000);
+    clickElement(page, 'a[data-seance-id="177"]');
+    await page.waitForTimeout(1000);
+    expect(() => chooseSeat(page, 13, 24).toThrowError('Invalid seat or row'));
+    await page.waitForTimeout(1000);
   });
 });
