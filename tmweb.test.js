@@ -11,10 +11,10 @@ afterEach(async () => {
 });
 
 describe("tmweb page test", () => {
-  test("Book on Today", async () => {
-    clickElement(page, 'a[data-time-stamp="1701723600"]');
+  test  ("Book on Today", async () => {
+    clickElement(page, 'a[data-time-stamp="1701982800"]');
     await page.waitForTimeout(1000);
-    clickElement(page, 'a[data-seance-id="190"]');
+    clickElement(page, 'a[data-seance-id="189"]');
     await page.waitForTimeout(1000);
     chooseSeat(page, 1, 2);
     await page.waitForTimeout(1000);
@@ -23,7 +23,7 @@ describe("tmweb page test", () => {
   });
 
   test("Book on Tomorrow", async () => {
-    clickElement(page, 'a[data-time-stamp="1701810000"]');
+    clickElement(page, 'a[data-time-stamp="1702069200"]');
     await page.waitForTimeout(1000);
     clickElement(page, 'a[data-seance-id="177"]');
     await page.waitForTimeout(1000);
@@ -34,7 +34,7 @@ describe("tmweb page test", () => {
   });
 
   test("Try book unexisted seat", async () => {
-    clickElement(page, 'a[data-time-stamp="1701810000"]');
+    clickElement(page, 'a[data-time-stamp="1702155600"]');
     await page.waitForTimeout(1000);
     clickElement(page, 'a[data-seance-id="177"]');
     await page.waitForTimeout(1000);
