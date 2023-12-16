@@ -1,6 +1,6 @@
 const { Given, When, Then, Before, After } = require("cucumber");
 const puppeteer = require("puppeteer");
-const expect = require("chai");
+const expect = require("chai").expect;
 const {
   clickElement,
   chooseSeat,
@@ -55,6 +55,6 @@ Then(
   "user choose {int} row and {int} seat",
   { timeout: 60000 },
   async function (row, seat) {
-    expect(await chooseSeat(this.page, 13, 24)).to.throw('Invalid seat or row');
+    expect(() => chooseSeat(this.page, row, seat).toThrowError('Invalid seat or row'));
   }
 );
